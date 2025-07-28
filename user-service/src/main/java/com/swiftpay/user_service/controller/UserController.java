@@ -3,6 +3,8 @@ package com.swiftpay.user_service.controller;
 import com.swiftpay.user_service.dto.UserDto;
 import com.swiftpay.user_service.model.User;
 import com.swiftpay.user_service.service.UserService;
+import jakarta.validation.Valid;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +19,13 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody UserDto userDto) {
+    public ResponseEntity<UserDto> register(@RequestBody @Valid UserDto userDto) {
         User user = userService.registerUser(userDto);
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
+        UserDto userDto1 = modelMapper.map(user, UserDto.class);
+        return new ResponseEntity<>(userDto1, HttpStatus.CREATED);
     }
 }
