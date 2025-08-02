@@ -31,13 +31,6 @@ public class UserController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
-    @PostMapping("/register")
-    public ResponseEntity<UserDto> register(@RequestBody @Valid UserDto userDto) {
-        logger.info("Received POST /users/register/");
-        User user = userService.registerUser(userDto);
-        UserDto userDto1 = modelMapper.map(user, UserDto.class);
-        return new ResponseEntity<>(userDto1, HttpStatus.CREATED);
-    }
 
     @GetMapping("/profile")
     public ResponseEntity<UserDto> getUserByEmail(Authentication authentication) {
