@@ -1,0 +1,6 @@
+[submodule "user-service"]
+	path = user-service
+	url = https://github.com/Tushar1235/user-service.git
+[submodule "account-service"]
+	path = account-service
+	url = https://github.com/Tushar1235/account-service.git
